@@ -78,3 +78,10 @@ class TestController extends AbstractController
 }
 
 ```
+
+## Add an exeternal Service as a known service
+
+```yaml
+# config/services.yaml
+Cocur\Slugify\Slugify:~
+```

@@ -2,26 +2,25 @@
 
 namespace App\Controller;
 
-use App\Services\Taxes\Calculator;
+use Cocur\Slugify\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
-    protected $calculator;
 
-    public function __construct(Calculator $calculator)
+    public function __construct()
     {
-        $this->calculator = $calculator;
     }
 
 
     #[Route('/test/', name: 'test',)]
-    public function index(): Response
+    public function index(Slugify $slugify): Response
     {
 
-        dd($this->calculator->calcul(120));
+        dd($slugify->slugify("Bouya ta mere"));
+
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
         ]);
