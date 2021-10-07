@@ -9,10 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController extends AbstractController
 {
-    #[Route('/test/{param}', name: 'test',)]
+    #[Route('/test/', name: 'test',)]
     public function index(Request $request): Response
     {
-        dd($request->attributes->get('age'));
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
         ]);
