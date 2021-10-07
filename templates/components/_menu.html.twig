@@ -1,0 +1,5 @@
+{% for i in CategoryRepository.findAll() %}
+	<li class="nav-item">
+		<a href="{{path('category.show',{'slug':i.slug})}}" class="nav-link">{{i.name}}</a>
+	</li>
+{% endfor %}
