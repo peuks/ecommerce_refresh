@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="{{path('home.index')}}">Symshop</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarColor03">
+		<ul class="navbar-nav mr-auto">
+			{% include "components/_menu.html.twig"%}
+		</ul>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a href="{{path('cart.show')}}" class="nav-link">
+					<div class="fas fa-shopping-cart"></div>
+					Panier ({{cartService.getTotal}})
+				</a>
+			</li>
+			{% if app.user %}
+				<li class="nav-item">
+					<a href="#" class="nav-link">Mes commandes</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{path('app_logout')}}" class="btn btn-danger">Log Out</a>
+				</li>
+			{% else %}
+				<li class="nav-item">
+					<a href="{{path('app_register')}}" class="nav-link">Inscription</a>
+
+				</li>
+				<li class="nav-item">
+					<a href="{{path('app_login')}}" class="btn btn-success">Login</a>
+				</li>
+			{% endif %}
+		</ul>
+
+	</div>
+</nav>
