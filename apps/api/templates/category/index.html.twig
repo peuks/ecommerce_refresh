@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Category!
+{% endblock %}
+
+{% block body %}
+	{% for category in categories %}
+		<h3>
+			<a href="{{ path('product_category',{'slug':category.slug})}}">{{category.name}}</a>
+
+
+		</h3>
+	{% endfor %}
+	<buttn href="{{path('add_category')}}" class="btn btn-primary">Rajouter une catégorie</buttn>
+{% endblock %}
