@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
                 // Définition du nom , prix, slug du produit , une description ainsi qu'une image.
                 $product->setLabel($faker->productname())
                     ->setPrice($faker->price(4000, 20000))
-                    ->setSlug(strtolower($this->slugger->slug($product->getLabel())))
+                    ->setSlug($this->slugger->slug(strtolower($product->getLabel())))
                     // ->setCategory($category)->setShortDescription($faker->paragraph())
                     ->setMainPicture($faker->pictureUrl(250, 200, true));
 
