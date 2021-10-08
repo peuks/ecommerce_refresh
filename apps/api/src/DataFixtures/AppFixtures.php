@@ -61,14 +61,16 @@ class AppFixtures extends Fixture
         // On utilise faker pour la génération de la data
         for ($c = 0; $c < 3; $c++) {
 
-            // // Création de la catégorie en définissant un nom et un slug
-            // $category = new Category;
-            // $category->setName($faker->department)
-            //     ->setSlug(strtolower($this->slugger->slug($category->getName())));
+            // Création de la catégorie en définissant un nom et un slug
+            $category = new Category;
+            $category->setLabel(
+                $faker->category()
+            )
+                ->setSlug($this->slugger->slug(strtolower($category->getLabel())));
 
-            // // Près enrengistrement 
+            // Près enrengistrement 
 
-            // $manager->persist($category);
+            $manager->persist($category);
 
             $products = [];
 
@@ -80,7 +82,8 @@ class AppFixtures extends Fixture
                 $product->setLabel($faker->productname())
                     ->setPrice($faker->price(4000, 20000))
                     ->setSlug($this->slugger->slug(strtolower($product->getLabel())))
-                    // ->setCategory($category)->setShortDescription($faker->paragraph())
+                    ->setCategory($category)
+                    ->setShortDescription($faker->paragraph())
                     ->setMainPicture($faker->pictureUrl(250, 200, true));
 
                 $products[] = $product;
