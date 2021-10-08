@@ -29,9 +29,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create("fr_FR");
-        // $faker->addProvider(new \Liior\Faker\Prices($faker));
-        // $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
-        // $faker->addProvider(new \WW\Faker\Provider\Picture($faker));
+        $faker->addProvider(new \Liior\Faker\Prices($faker));
+        $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
+        $faker->addProvider(new \WW\Faker\Provider\Picture($faker));
 
         // Création d'un admin
         // $admin = new User();
@@ -77,7 +77,7 @@ class AppFixtures extends Fixture
                 $product = new Product();
 
                 // Définition du nom , prix, slug du produit , une description ainsi qu'une image.
-                $product->setLabel($faker->productname)
+                $product->setLabel($faker->productname())
                     ->setPrice($faker->price(4000, 20000))
                     ->setSlug(strtolower($this->slugger->slug($product->getLabel())))
                     // ->setCategory($category)->setShortDescription($faker->paragraph())

@@ -61,7 +61,7 @@ class Product
 
     public function setPrice(int $price): self
     {
-        $this->price = $prince;
+        $this->price = $price;
 
         return $this;
     }

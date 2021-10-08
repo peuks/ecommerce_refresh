@@ -288,5 +288,8 @@
     },
     "twig/twig": {
         "version": "v3.3.3"
+    },
+    "woodsandwalker/faker-picture": {
+        "version": "v1.0.0"
     }
 }
