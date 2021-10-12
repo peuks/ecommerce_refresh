@@ -2,14 +2,25 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProductController extends AbstractController
+
 {
+    protected $manager;
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     #[Route('/{slug}', name: 'product_category')]
     public function category($slug, CategoryRepository $categoryRepository)
     {
@@ -49,4 +60,61 @@ class ProductController extends AbstractController
             "product" => $product
         ]);
     }
+
+    #[Route("/admin/product/create",name:"product_create")]
+    public function add(SluggerInterface $slugger, Request $request): Response
+    {
+        // $product = new Product;
+        // $form = $this->createForm(ProductType::class, $product);
+        // Création du formulaire en se basant sur notre object Product
+
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+            // $product->setSlug(strtolower($slugger->slug($product->getLabel())));
+            // Update the slug in case the name has changed
+
+            // $this->manager->persist($product);
+            // $this->manager->flush();
+
+            // return $this->redirectToRoute('product.show', [
+            //     'category_slug' => $product->getCategory()->getSlug(),
+            //     'slug' => $product->getSlug(),
+            // ]);
+        // }
+
+
+        return $this->render('product/addEdit.html.twig', [
+            // 'form' => $form->createView(),
+            'add_edit' => true, // Set template for creation ( title and buttons )
+        ]);
+    }
+
+    // #[Route("/admin/product/create",name:"product_create")]
+    
+    
+    // #[Route("/admin/product/edit/{id}",name:"product_edit")]
+    // public function edit(Product $product = null, SluggerInterface $slugger, Request $request)
+    // {
+    //     $form = $this->createForm(ProductType::class, $product);
+
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $product->setSlug(strtolower($slugger->slug($product->getName())));
+
+    //         // $this->manager->flush();
+    //         return $this->redirectToRoute('product.show', [
+    //             'category_slug' => $product->getCategory()->getSlug(),
+    //             'slug' => $product->getSlug(),
+    //         ]);
+    //     }
+
+    //     return $this->render('product/addEdit.html.twig', [
+    //         'form' => $form->createView(),
+    //         'add_edit' => false,
+
+    //     ]);
+    // }
 }
