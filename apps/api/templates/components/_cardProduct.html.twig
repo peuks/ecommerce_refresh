@@ -19,6 +19,24 @@
 		{# <a href="{{ path('product.show',{'category_slug':product.category.slug,'slug':product.slug})}}" class="btn btn-primary btn-sm">Détails</a> #}
 
 		{# <a href="{{path('cart.add',{'id':product.id})}}" class="btn btn-success btn-sm">Ajouter</a> #}
-
+		<a href="
+			{{path
+				(
+					'product_show',{
+					'category_slug': product.category.slug,
+					'slug': product.slug
+					}
+				)
+			}}
+			" class="btn btn-success btn-lg">
+				<i class="fas fa-shopping-cart"></i>
+				Détails
+			</a>
+			<a href="
+			{# {{path('cart.add',{'id': product.id})}} #}
+			" class="btn btn-success btn-lg">
+				<i class="fas fa-shopping-cart"></i>
+				Ajouter au panier
+			</a>
 	</div>
 </div>

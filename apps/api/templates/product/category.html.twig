@@ -8,7 +8,7 @@
 {% block body %}
 	<ol class="breadcrumb">
 		<li
-			class="breadcrumb-item">{# <a href="{{ path('home.index')}}">Accueil</a> #}
+			class="breadcrumb-item"><a href="{{ path('home.index')}}">Accueil</a>
 
 		</li>
 
@@ -45,9 +45,24 @@
 							{{product.shortDescription}}
 
 						</p>
-						{# <a href="{{ path('product.show',{'category_slug':product.category.slug,'slug':product.slug})}}" class="btn btn-primary btn-sm">Détails</a>
-						
-												<a href="{{path('cart.add',{'id':product.id})}}" class="btn btn-success btn-sm">Ajouter</a> #}
+						{# <pre>
+							{{ dump(product) }}
+						</pre> #}
+						<a href="
+							{{ path('product_show',
+								{
+									'category_slug':product.category.slug,
+									'slug':product.slug})
+								}}
+								" class="btn btn-primary btn-sm">
+							Détails
+						</a>
+					
+						<a href="
+							{# {{path('cart.add',{'id':product.id})}} #}
+						" class="btn btn-success btn-sm">
+							Ajouter
+						</a>
 
 					</div>
 				</div>
