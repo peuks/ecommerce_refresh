@@ -108,7 +108,8 @@ class ProductController extends AbstractController
             $product->setSlug(strtolower($slugger->slug($product->getLabel())));
 
             $this->manager->flush();
-            return $this->redirectToRoute('product.show', [
+
+            return $this->redirectToRoute('product_show', [
                 'category_slug' => $product->getCategory()->getSlug(),
                 'slug' => $product->getSlug(),
             ]);
@@ -116,7 +117,7 @@ class ProductController extends AbstractController
 
         return $this->render('product/addEdit.html.twig', [
             'form' => $form->createView(),
-            'add_edit' => false,
+            'add_edit' => false, //Not used any more
 
         ]);
     }

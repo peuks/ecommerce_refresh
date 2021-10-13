@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    /**
-     * 'homepage' is the name of the rout path "/" 
-     * @Route("/",name="home.index")
-     */
+
+    // 'homepage' is the name of the rout path "/" 
+    #[Route("/", name: "home_index")]
+
     public function homeapge(ProductRepository $productRepository)
     {
         // findBy() returns an array of objects with the given conditions.
