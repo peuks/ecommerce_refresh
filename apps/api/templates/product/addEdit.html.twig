@@ -2,21 +2,43 @@
 
 
 {% block  title %}
+{% if app.request.attributes.get('_route') == 'product_create' %}
+	New Product
+{% elseif app.request.attributes.get('_route') == 'product_edit' %}
 	Edit a product
+{% else %}
+   N/A
+{% endif %}
+	
 {% endblock %}
 
 {% block body %}
+{% if app.request.attributes.get('_route') == 'product_create' %}
 	<h1>Edition/Création du Produit</h1>
+{% endif %}
+
+
+{% if app.request.attributes.get('_route') == 'product_create' %}
+	<h1>
+		Création du produit
+	</h1>
+{% elseif app.request.attributes.get('_route') == 'product_edit' %}
+	<h1>
+	Edition/Création du Produit
+	</h1>
+{% else %}
+   Sold-out!
+{% endif %}
 
 	{{form_start(form)}}
 
 	<div class="row">
 		<div class="col">
-			{{form_row(form.name)}}
+			{{form_row(form.label)}}
 			{{form_row(form.price)}}
-			{{form_row(form.mainPicture)}}
 		</div>
 		<div class="col">
+			{{form_row(form.mainPicture)}}
 			{{form_row(form.category)}}
 			{{form_row(form.shortDescription)}}
 		</div>
