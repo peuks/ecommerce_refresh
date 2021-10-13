@@ -97,30 +97,27 @@ class ProductController extends AbstractController
         ]);
     }
 
-    // #[Route("/admin/product/create",name:"product_create")]
+    #[Route("/admin/product/edit/{id}", name: "product_edit")]
+    public function edit(Product $product, SluggerInterface $slugger, Request $request)
+    {
+        $form = $this->createForm(ProductType::class, $product);
 
+        $form->handleRequest($request);
 
-    // #[Route("/admin/product/edit/{id}",name:"product_edit")]
-    // public function edit(Product $product = null, SluggerInterface $slugger, Request $request)
-    // {
-    //     $form = $this->createForm(ProductType::class, $product);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $product->setSlug(strtolower($slugger->slug($product->getLabel())));
 
-    //     $form->handleRequest($request);
+            $this->manager->flush();
+            return $this->redirectToRoute('product.show', [
+                'category_slug' => $product->getCategory()->getSlug(),
+                'slug' => $product->getSlug(),
+            ]);
+        }
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $product->setSlug(strtolower($slugger->slug($product->getName())));
+        return $this->render('product/addEdit.html.twig', [
+            'form' => $form->createView(),
+            'add_edit' => false,
 
-    //         // $this->manager->flush();
-    //         return $this->redirectToRoute('product.show', [
-    //             'category_slug' => $product->getCategory()->getSlug(),
-    //             'slug' => $product->getSlug(),
-    //         ]);
-    //     }
-
-    //     return $this->render('product/addEdit.html.twig', [
-    //         'form' => $form->createView(),
-    //         'add_edit' => false,
-
-    //     ]);
-    // }
+        ]);
+    }
 }
