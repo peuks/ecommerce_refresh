@@ -10,8 +10,8 @@ use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
@@ -19,10 +19,10 @@ class AppFixtures extends Fixture
 
     public function __construct(
         SluggerInterface $slugger,
-        // UserPasswordEncoderInterface $encoder
+        UserPasswordHasherInterface $passwordHasher
     ) {
         $this->slugger = $slugger;
-        // $this->encoder = $encoder;
+        $this->passwordHasher = $passwordHasher;
     }
 
 
@@ -34,26 +34,28 @@ class AppFixtures extends Fixture
         $faker->addProvider(new \WW\Faker\Provider\Picture($faker));
 
         // Création d'un admin
-        // $admin = new User();
-        // $admin->setEmail("admin@admin.com")
-        //     ->setFullName("Admin")
-        //     ->setRoles(['ROLE_ADMIN'])
-        //     ->setPassword($this->encoder->encodePassword($admin, 'password'));
+        $admin = new User();
+        $admin->setEmail("admin@admin.com")
+            ->setFullName("Admin")
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
 
-        // // Persist Admin
-        // $manager->persist($admin);
+        // Persist Admin
+        $manager->persist($admin);
 
-        // $users = [];
-        // // Création des utilisateurs
-        // for ($i = 0; $i < 10; $i++) {
-        //     $user = new User;
-        //     $user->setEmail("user$i@gmail.com")
-        //         ->setFullName($faker->name())
-        //         ->setPassword($this->encoder->encodePassword($user, 'password'));
-        //     $users[] = $user;
-        //     // persis User
-        //     $manager->persist($user);
-        // }
+        $users = [];
+        // Création des utilisateurs
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User;
+            $user->setEmail("user$i@gmail.com")
+                ->setFullName($faker->name())
+                // ->setPassword($this->encoder->encodePassword($user, 'password'));
+                ->setPassword($this->passwordHasher->hashPassword($admin, 'password'));
+
+            $users[] = $user;
+            // persis User
+            $manager->persist($user);
+        }
 
 
         // Créer n catégories en attribuant un nom et un slug.

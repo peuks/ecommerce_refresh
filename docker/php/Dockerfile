@@ -2,11 +2,6 @@
 
 FROM php:8.0.3-fpm-alpine
 
-#RUN groupadd -r skuep && useradd -r -g skuep skuep
-
-RUN addgroup -S skuep && adduser -S skuep -G skuep
-
-
 WORKDIR /usr/src/app
 
 RUN apk --no-cache update \
@@ -20,7 +15,6 @@ RUN apk --no-cache update \
   && docker-php-ext-install pdo_mysql \
   && wget https://get.symfony.com/cli/installer -O - | bash \
   && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-USER skuep
 
 COPY --chown=1000:1000 apps/api /usr/src/app
 
