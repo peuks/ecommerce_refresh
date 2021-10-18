@@ -1,7 +1,7 @@
 <?php
 
-use App\Form\DataTransformer\CentimesTransformer;
 use Symfony\Component\Form\AbstractType;
+use App\Form\DataTransformer\CentimesTransformer;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,9 +14,11 @@ class PriceType extends AbstractType
         return ($options['divisor'] === false) ?: $builder->addModelTransformer(new CentimesTransformer);
     }
 
+    /**
+     * On est en filliation avec Numbertype . Notre champ s'inspire de NumberType
+     */
     public function getParent()
     {
-        // On est en filliation avec Numbertype . Notre champ s'inspire de NumberType
         return NumberType::class;
     }
 

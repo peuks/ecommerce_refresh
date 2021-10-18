@@ -8,7 +8,7 @@
 
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item">
-			<a href=" {{path('home.index')}} ">Accueil</a>
+			<a href=" {{path('home_index')}} ">Accueil</a>
 		</li>
 		<li class="breadcrumb-item">
 			<a href="{{ path('product_category',{'slug':product.category.slug})}}">
@@ -40,8 +40,8 @@
 			</p>
 
 			<a href="
-			{# {{path('cart.add',{'id': product.id})}} #}
-			" class="btn btn-success btn-lg">
+							{# {{path('cart.add',{'id': product.id})}} #}
+							" class="btn btn-success btn-lg">
 				<i class="fas fa-shopping-cart"></i>
 				Ajouter au panier
 			</a>
