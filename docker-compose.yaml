@@ -40,6 +40,7 @@ services:
     depends_on:
       - mysql
 
+
   maildev:
     container_name: "maildev"
     image: djfarrelly/maildev

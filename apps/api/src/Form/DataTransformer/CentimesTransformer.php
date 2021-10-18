@@ -10,15 +10,27 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 class CentimesTransformer implements DataTransformerInterface
 {
+    // Si je reçois quelque chose , diviser par 100 pour l'afficher en €
+    // public function transform($value)
+    // {
+    //     return (null === $value) ?: $value / 100;
+    // }
     public function transform($value)
     {
-        // Si je reçois quelque chose , diviser par 100 pour l'afficher en €
-        return (null === $value) ?: $value / 100;
+        if (null === $value) {
+            return;
+        }
+
+
+        return  $value / 100;
     }
 
     public function reverseTransform($value)
     {
+        if (null === $value) {
+            return;
+        }
 
-        return (null === $value) ?: $value * 100;
+        return $value * 100;
     }
 }
